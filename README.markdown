@@ -21,9 +21,8 @@ Renderizando paginas usando TemplateEngine
 				this.engine = engine;
 			}
 			
-			@Path("/admin/dashboard")
-			@Get
-			public void lista() throws IOException, TemplateException {
+			@Get("/admin/dashboard")
+			public void lista() throws IOException {
 				engine.use("dashboard").with("usuarioLogado", usuario).render();
 			}
 			
@@ -31,7 +30,9 @@ Renderizando paginas usando TemplateEngine
 		
 Renderizando paginas usando Result
 ------
-
+		
+		import static br.com.caelum.vraptor.templates.TemplateResult.*;
+		
 		@Resource
 		public class DashboardController {
 		
@@ -43,9 +44,8 @@ Renderizando paginas usando Result
 				this.result = result;
 			}
 			
-			@Path("/admin/dashboard")
-			@Get
-			public void lista() throws IOException, TemplateException {
+			@Get("/admin/dashboard")
+			public void lista() throws IOException {
 				result.use(template("dashboard")).with("usuarioLogado", usuario).render();
 			}
 			
