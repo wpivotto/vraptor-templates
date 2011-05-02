@@ -1,10 +1,10 @@
 ## vraptor-templates
 
 Uma biblioteca simples para renderizar templates com vraptor.
-É um fork do projeto <https://github.com/caelum/vraptor-freemarker>
+Ã‰ um fork do projeto <https://github.com/caelum/vraptor-freemarker>
 
-A idéia é tornar padrão a renderização de templates independente da engine escolhida (Freemarker, Velocity...)
-bastando adicionar os jars da sua implementação preferida no classpath
+A idÃ©ia Ã© tornar padrÃ£o a renderizaÃ§Ã£o de templates independente da engine escolhida (Freemarker, Velocity...)
+bastando adicionar os jars da sua implementaÃ§Ã£o preferida no classpath
 
 
 Renderizando paginas usando TemplateEngine
