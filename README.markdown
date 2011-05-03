@@ -6,6 +6,12 @@ Uma biblioteca simples para renderizar templates com vraptor.
 A idéia é tornar padrão a renderização de templates independente da engine escolhida (Freemarker, Velocity...)
 bastando adicionar os jars da sua implementação preferida no classpath
 
+Instalação (Adicione ao seu web.xml)
+------
+		<context-param>
+        	<param-name>br.com.caelum.vraptor.packages</param-name>
+	        <param-value>br.com.caelum.vraptor.templates</param-value>
+    	</context-param>
 
 Renderizando paginas usando TemplateEngine
 ------
