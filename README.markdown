@@ -13,17 +13,17 @@ Renderizando paginas usando TemplateEngine
 		@Resource
 		public class DashboardController {
 		
-			private final Usuario usuario;
+			private final Clients clients;
 			private final TemplateEngine engine;
 		
-			public DashboardController(Usuario usuario, TemplateEngine engine) {
-				this.usuario = usuario;
+			public DashboardController(Clients clients, TemplateEngine engine) {
+				this.clients = clients;
 				this.engine = engine;
 			}
 			
-			@Get("/admin/dashboard")
-			public void lista() throws IOException {
-				engine.use("dashboard").with("usuarioLogado", usuario).render();
+			@Get("/clients/dashboard")
+			public void dashboard() throws IOException {
+				engine.use("clients/dashboard").with("clients", clients.listAll()).render();
 			}
 			
 		}
@@ -36,24 +36,24 @@ Renderizando paginas usando Result
 		@Resource
 		public class DashboardController {
 		
-			private final Usuario usuario;
+			private final Clients clients;
 			private final Result result;
 		
-			public DashboardController(Usuario usuario, Result result) {
-				this.usuario = usuario;
+			public DashboardController(Clients clients, Result result) {
+				this.clients = clients;
 				this.result = result;
 			}
 			
-			@Get("/admin/dashboard")
-			public void lista() throws IOException {
-				result.use(template("dashboard")).with("usuarioLogado", usuario).render();
+			@Get("/clients/dashboard")
+			public void dashboard() throws IOException {
+				result.use(template()).with("clients", clients.listAll()).render();
 			}
 			
 		}
 
-# Renderizando emails
+# Convenções
 
-		String body = engine.use("notificacao_email_enviado").with("usuarioLogado", usuario).getContent();
-		String body = result.use(template("notificacao_email_enviado")).with("usuarioLogado", usuario).getContent();
+Ao terminar a execução do método, o dispatch da requisição vai para o template /WEB-INF/templates/clients/dashboard.vm ou ftl.
+Ou seja, a convenção para a view padrão é /WEB-INF/templates/<nome_do_controller>/<nome_do_metodo>.<extensao_do_template>
 
 
