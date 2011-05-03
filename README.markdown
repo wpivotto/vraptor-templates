@@ -54,6 +54,6 @@ Renderizando paginas usando Result
 # Convenções
 
 Ao terminar a execução do método, o dispatch da requisição vai para o template /WEB-INF/templates/clients/dashboard.vm ou ftl.
-Ou seja, a convenção para a view padrão é /WEB-INF/templates/<nome_do_controller>/<nome_do_metodo>.<extensao_do_template>
+Ou seja, a convenção para a view padrão é /WEB-INF/templates/nome_do_controller/nome_do_metodo.extensao_do_template
 
 
