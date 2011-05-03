@@ -12,5 +12,6 @@ import java.io.IOException;
 public interface TemplateEngine {
 
 	Template use(String name) throws IOException;
-
+	TemplateConfiguration getConfiguration();
+	
 }

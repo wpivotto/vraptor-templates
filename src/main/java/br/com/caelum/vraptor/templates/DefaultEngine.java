@@ -30,6 +30,11 @@ public class DefaultEngine implements TemplateEngine {
 		return new DefaultTemplate(renderer, response, result);
 		
 	}
+
+	@Override
+	public TemplateConfiguration getConfiguration() {
+		return this.cfg;
+	}
 	
 
 }

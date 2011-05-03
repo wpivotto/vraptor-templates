@@ -1,5 +1,7 @@
 package br.com.caelum.vraptor.templates;
 
+import javax.servlet.ServletContext;
+
 import br.com.caelum.vraptor.ioc.ApplicationScoped;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.ComponentFactory;
@@ -11,18 +13,26 @@ import br.com.caelum.vraptor.templates.velocity.VelocityConfiguration;
 public class TemplateEngineSelector implements ComponentFactory<TemplateConfiguration>  {
 
 	private TemplateConfiguration cfg;
+	private final ServletContext context;
 	
+
+	public TemplateEngineSelector(ServletContext context) {
+		this.context = context;
+	}
+
 	@Override
 	public TemplateConfiguration getInstance() {
 
 		if(this.cfg == null){
 			
+			String path = context.getRealPath("/WEB-INF/templates");
+			
 			if (isClassPresent("freemarker.template.Template")) {
-				this.cfg = new FreemarkerConfiguration();
+				this.cfg = new FreemarkerConfiguration(path);
 			}
 			
 			else if (isClassPresent("org.apache.velocity.Template")) {
-				this.cfg = new VelocityConfiguration();
+				this.cfg = new VelocityConfiguration(path);
 			}
 			
 			else

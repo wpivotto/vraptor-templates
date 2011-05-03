@@ -17,17 +17,18 @@ public class VelocityConfiguration implements TemplateConfiguration {
 	private VelocityContext context;
 	private VelocityEngine engine;
 
-	public VelocityConfiguration() {
+	public VelocityConfiguration(String path) {
 		Properties p = new Properties();
-	    p.setProperty("resource.loader", "class");
-	    p.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+		p.setProperty("resource.loader", "file");
+		p.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.FileResourceLoader");
+		p.setProperty("file.resource.loader.path", path);
 	    context = new VelocityContext();
 	    engine = new VelocityEngine(p);
 	    engine.init();
 	}
 
 	public Template getTemplate(String templateName) throws IOException {
-		return engine.getTemplate("/templates/" + templateName + ".vm");
+		return engine.getTemplate(templateName + ".vm");
 	}
 
 	@Override
@@ -35,5 +36,6 @@ public class VelocityConfiguration implements TemplateConfiguration {
 		Template template = getTemplate(templateName);
 		return new VelocityRenderer(template, context);
 	}
+
 	
 }

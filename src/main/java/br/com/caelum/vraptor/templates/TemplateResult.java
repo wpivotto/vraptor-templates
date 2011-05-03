@@ -11,11 +11,13 @@ import br.com.caelum.vraptor.ioc.RequestScoped;
 public class TemplateResult implements View {
 	
 	private final Template template;
-	private static String name;
 	
-	public TemplateResult(TemplateEngine engine){
+	public TemplateResult(TemplateEngine engine, TemplatePathResolver resolver){
+		
 		try {
-			this.template = engine.use(name);
+			
+			this.template = engine.use(resolver.getTemplatePath());
+		
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -26,8 +28,7 @@ public class TemplateResult implements View {
 		return template;
 	}
 	
-	public static Class<TemplateResult> template(String templateName) {  
-		name = templateName;
+	public static Class<TemplateResult> template() {  
         return TemplateResult.class;  
    }  
 	
