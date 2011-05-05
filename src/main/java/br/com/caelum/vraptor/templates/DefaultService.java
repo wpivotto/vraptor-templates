@@ -1,7 +1,5 @@
 package br.com.caelum.vraptor.templates;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.vraptor.Result;
@@ -23,9 +21,9 @@ public class DefaultService implements TemplateService {
 	}
 	
 	@Override
-	public Template use(String name) throws IOException {
+	public Template use(String template){
 		
-		TemplateRenderer renderer = plugin.getRenderer(name);
+		TemplateRenderer renderer = plugin.getRenderer(template);
 		
 		return new DefaultTemplate(renderer, response, result);
 		

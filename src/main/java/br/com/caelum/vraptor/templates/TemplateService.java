@@ -1,6 +1,5 @@
 package br.com.caelum.vraptor.templates;
 
-import java.io.IOException;
 
 /**
  * A Generic template renderer
@@ -11,6 +10,6 @@ import java.io.IOException;
  */
 public interface TemplateService {
 
-	Template use(String name) throws IOException;
+	Template use(String name);
 	
 }

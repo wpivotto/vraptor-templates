@@ -1,7 +1,6 @@
 package br.com.caelum.vraptor.templates.velocity;
 
 
-import java.io.IOException;
 import java.util.Properties;
 
 import org.apache.velocity.Template;
@@ -27,12 +26,12 @@ public class VelocityPlugin implements TemplatePlugin {
 	    engine.init();
 	}
 
-	public Template getTemplate(String templateName) throws IOException {
+	public Template getTemplate(String templateName) {
 		return engine.getTemplate(templateName + ".vm");
 	}
 
 	@Override
-	public TemplateRenderer getRenderer(String templateName) throws IOException {
+	public TemplateRenderer getRenderer(String templateName){
 		Template template = getTemplate(templateName);
 		return new VelocityRenderer(template, context);
 	}

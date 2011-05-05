@@ -28,7 +28,7 @@ Renderizando paginas usando TemplateService
 			}
 			
 			@Get("/clients/dashboard")
-			public void dashboard() throws IOException {
+			public void dashboard(){
 				service.use("clients/dashboard").with("clients", clients.listAll()).render();
 			}
 			
@@ -51,7 +51,7 @@ Renderizando paginas usando Result
 			}
 			
 			@Get("/clients/dashboard")
-			public void dashboard() throws IOException {
+			public void dashboard(){
 				result.use(template()).with("clients", clients.listAll()).render();
 			}
 			
