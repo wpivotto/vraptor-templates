@@ -12,7 +12,7 @@ import br.com.caelum.vraptor.templates.velocity.VelocityPlugin;
 @ApplicationScoped
 public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin>  {
 
-	private TemplatePlugin cfg;
+	private TemplatePlugin plugin;
 	private final ServletContext context;
 	
 
@@ -23,24 +23,24 @@ public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin> 
 	@Override
 	public TemplatePlugin getInstance() {
 
-		if(this.cfg == null){
+		if(this.plugin == null){
 			
 			String path = context.getRealPath("/WEB-INF/templates");
 			
 			if (isClassPresent("freemarker.template.Template")) {
-				this.cfg = new FreemarkerPlugin(path);
+				this.plugin = new FreemarkerPlugin(path);
 			}
 			
 			else if (isClassPresent("org.apache.velocity.Template")) {
-				this.cfg = new VelocityPlugin(path);
+				this.plugin = new VelocityPlugin(path);
 			}
 			
 			else
-				throw new IllegalArgumentException("Could not find a template engine to use");
+				throw new PluginNotFoundException("Could not find a template engine to use");
 			
 		}
 		
-		return cfg;
+		return plugin;
 		
 	}
 
