@@ -8,16 +8,16 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import br.com.caelum.vraptor.templates.TemplateConfiguration;
+import br.com.caelum.vraptor.templates.TemplatePlugin;
 import br.com.caelum.vraptor.templates.TemplateRenderer;
 
 
-public class VelocityConfiguration implements TemplateConfiguration {
+public class VelocityPlugin implements TemplatePlugin {
 
 	private VelocityContext context;
 	private VelocityEngine engine;
 
-	public VelocityConfiguration(String path) {
+	public VelocityPlugin(String path) {
 		Properties p = new Properties();
 		p.setProperty("resource.loader", "file");
 		p.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.FileResourceLoader");

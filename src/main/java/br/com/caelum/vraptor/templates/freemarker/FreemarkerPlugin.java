@@ -4,18 +4,18 @@ package br.com.caelum.vraptor.templates.freemarker;
 import java.io.File;
 import java.io.IOException;
 
-import br.com.caelum.vraptor.templates.TemplateConfiguration;
+import br.com.caelum.vraptor.templates.TemplatePlugin;
 import br.com.caelum.vraptor.templates.TemplateRenderer;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
-public class FreemarkerConfiguration implements TemplateConfiguration {
+public class FreemarkerPlugin implements TemplatePlugin {
   
 	private Configuration cfg;
 	
-	public FreemarkerConfiguration(String path){
+	public FreemarkerPlugin(String path){
 		
 		cfg = new Configuration();
 		TemplateLoader loader;

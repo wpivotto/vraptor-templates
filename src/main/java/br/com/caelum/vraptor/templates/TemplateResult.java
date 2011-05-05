@@ -12,11 +12,11 @@ public class TemplateResult implements View {
 
 	private final Template template;
 
-	public TemplateResult(TemplateEngine engine, TemplatePathResolver resolver) {
+	public TemplateResult(TemplateService service, TemplatePathResolver resolver) {
 
 		try {
 
-			this.template = engine.use(resolver.getTemplatePath());
+			this.template = service.use(resolver.getTemplatePath());
 
 		} catch (IOException e) {
 			throw new RuntimeException(e);

@@ -9,9 +9,8 @@ import java.io.IOException;
  * @author Guilherme Silveira
  *
  */
-public interface TemplateEngine {
+public interface TemplateService {
 
 	Template use(String name) throws IOException;
-	TemplateConfiguration getConfiguration();
 	
 }

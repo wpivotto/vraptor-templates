@@ -5,34 +5,34 @@ import javax.servlet.ServletContext;
 import br.com.caelum.vraptor.ioc.ApplicationScoped;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.ComponentFactory;
-import br.com.caelum.vraptor.templates.freemarker.FreemarkerConfiguration;
-import br.com.caelum.vraptor.templates.velocity.VelocityConfiguration;
+import br.com.caelum.vraptor.templates.freemarker.FreemarkerPlugin;
+import br.com.caelum.vraptor.templates.velocity.VelocityPlugin;
 
 @Component
 @ApplicationScoped
-public class TemplateEngineSelector implements ComponentFactory<TemplateConfiguration>  {
+public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin>  {
 
-	private TemplateConfiguration cfg;
+	private TemplatePlugin cfg;
 	private final ServletContext context;
 	
 
-	public TemplateEngineSelector(ServletContext context) {
+	public TemplatePluginSelector(ServletContext context) {
 		this.context = context;
 	}
 
 	@Override
-	public TemplateConfiguration getInstance() {
+	public TemplatePlugin getInstance() {
 
 		if(this.cfg == null){
 			
 			String path = context.getRealPath("/WEB-INF/templates");
 			
 			if (isClassPresent("freemarker.template.Template")) {
-				this.cfg = new FreemarkerConfiguration(path);
+				this.cfg = new FreemarkerPlugin(path);
 			}
 			
 			else if (isClassPresent("org.apache.velocity.Template")) {
-				this.cfg = new VelocityConfiguration(path);
+				this.cfg = new VelocityPlugin(path);
 			}
 			
 			else

@@ -13,23 +13,23 @@ Instalação (Adicione ao seu web.xml)
 	        <param-value>br.com.caelum.vraptor.templates</param-value>
     	</context-param>
 
-Renderizando paginas usando TemplateEngine
+Renderizando paginas usando TemplateService
 ------
 
 		@Resource
 		public class DashboardController {
 		
 			private final Clients clients;
-			private final TemplateEngine engine;
+			private final TemplateService service;
 		
-			public DashboardController(Clients clients, TemplateEngine engine) {
+			public DashboardController(Clients clients, TemplateService service) {
 				this.clients = clients;
-				this.engine = engine;
+				this.service = service;
 			}
 			
 			@Get("/clients/dashboard")
 			public void dashboard() throws IOException {
-				engine.use("clients/dashboard").with("clients", clients.listAll()).render();
+				service.use("clients/dashboard").with("clients", clients.listAll()).render();
 			}
 			
 		}

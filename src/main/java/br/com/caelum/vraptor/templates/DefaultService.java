@@ -10,30 +10,25 @@ import br.com.caelum.vraptor.ioc.RequestScoped;
 
 @Component
 @RequestScoped
-public class DefaultEngine implements TemplateEngine {
+public class DefaultService implements TemplateService {
 
 	private final HttpServletResponse response;
 	private final Result result;
-	private final TemplateConfiguration cfg;
+	private final TemplatePlugin plugin;
 	
-	public DefaultEngine(Result result, HttpServletResponse response, TemplateConfiguration cfg) {
+	public DefaultService(Result result, HttpServletResponse response, TemplatePlugin plugin) {
 		this.result = result;
 		this.response = response;
-		this.cfg = cfg;
+		this.plugin = plugin;
 	}
 	
 	@Override
 	public Template use(String name) throws IOException {
 		
-		TemplateRenderer renderer = cfg.getRenderer(name);
+		TemplateRenderer renderer = plugin.getRenderer(name);
 		
 		return new DefaultTemplate(renderer, response, result);
 		
-	}
-
-	@Override
-	public TemplateConfiguration getConfiguration() {
-		return this.cfg;
 	}
 	
 
