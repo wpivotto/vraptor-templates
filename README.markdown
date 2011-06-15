@@ -57,6 +57,18 @@ Renderizando paginas usando Result
 			
 		}
 
+Objetor implicitos
+------
+
+Objetos injetados pela biblioteca:
+
+* request
+* session
+* localization
+* validator
+
+Exemplos de uso: ${localization.locale.country}
+
 # Convenções
 
 Ao terminar a execução do método, o dispatch da requisição vai para o template /WEB-INF/templates/clients/dashboard.vm ou ftl.
