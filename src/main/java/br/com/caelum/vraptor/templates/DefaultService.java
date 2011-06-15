@@ -1,5 +1,7 @@
 package br.com.caelum.vraptor.templates;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.vraptor.Result;
@@ -12,13 +14,13 @@ public class DefaultService implements TemplateService {
 	private final Result result;
 	private final HttpServletResponse response;
 	private final TemplatePlugin plugin;
-	private final TemplateDecorator decorator;
+	private final List<TemplateDecorator> decorators;
 	
-	public DefaultService(Result result, HttpServletResponse response, TemplatePlugin plugin, TemplateDecorator decorator) {
+	public DefaultService(Result result, HttpServletResponse response, TemplatePlugin plugin, List<TemplateDecorator> decorators) {
 		this.result = result;
 		this.response = response;
 		this.plugin = plugin;
-		this.decorator = decorator;
+		this.decorators = decorators;
 	}
 	
 	@Override
@@ -26,7 +28,9 @@ public class DefaultService implements TemplateService {
 		
 		TemplateRenderer renderer = plugin.getRenderer(templateName);
 		Template template = new DefaultTemplate(renderer, response, result);
-		decorator.decorate(template);
+		for(TemplateDecorator decorator : decorators){
+			decorator.decorate(template);
+		}
 		return template;
 		
 	}

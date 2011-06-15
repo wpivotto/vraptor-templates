@@ -57,7 +57,7 @@ Renderizando paginas usando Result
 			
 		}
 
-Objetor implicitos
+Objetos implicitos
 ------
 
 Objetos injetados pela biblioteca:
@@ -68,6 +68,25 @@ Objetos injetados pela biblioteca:
 * validator
 
 Exemplos de uso: ${localization.locale.country}
+
+Decorando templates
+------
+
+Para injetar outros objetos basta construir uma classe como esta
+
+	@Component
+	public class CustomDecorator implements TemplateDecorator {
+
+		private final User user;
+	
+		public CustomDecorator(User user) {
+			this.user = user;
+		}
+	
+		public void decorate(Template template){
+			template.with("user", user);
+		}
+	}
 
 # Convenções
 
