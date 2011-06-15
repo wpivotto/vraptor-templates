@@ -11,9 +11,7 @@ public class TemplateResult implements View {
 	private final Template template;
 
 	public TemplateResult(TemplateService service, TemplatePathResolver resolver) {
-
 		this.template = service.use(resolver.getTemplatePath());
-
 	}
 
 	public Template with(String key, Object value) {

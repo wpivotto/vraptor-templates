@@ -1,12 +1,11 @@
-package br.com.caelum.vraptor.templates;
+package br.com.caelum.vraptor.templates.plugins;
 
 import javax.servlet.ServletContext;
 
 import br.com.caelum.vraptor.ioc.ApplicationScoped;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.ComponentFactory;
-import br.com.caelum.vraptor.templates.freemarker.FreemarkerPlugin;
-import br.com.caelum.vraptor.templates.velocity.VelocityPlugin;
+import br.com.caelum.vraptor.templates.PluginNotFoundException;
 
 @Component
 @ApplicationScoped

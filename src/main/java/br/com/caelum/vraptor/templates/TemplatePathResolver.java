@@ -1,11 +1,9 @@
 package br.com.caelum.vraptor.templates;
 
 import br.com.caelum.vraptor.ioc.Component;
-import br.com.caelum.vraptor.ioc.RequestScoped;
 import br.com.caelum.vraptor.resource.ResourceMethod;
 
 @Component
-@RequestScoped
 public class TemplatePathResolver {
 
 	private String path;

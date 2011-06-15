@@ -1,4 +1,4 @@
-package br.com.caelum.vraptor.templates.velocity;
+package br.com.caelum.vraptor.templates.plugins;
 
 
 import java.util.Properties;
@@ -7,7 +7,6 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import br.com.caelum.vraptor.templates.TemplatePlugin;
 import br.com.caelum.vraptor.templates.TemplateRenderer;
 
 

@@ -1,25 +1,25 @@
-package br.com.caelum.vraptor.templates.freemarker;
+package br.com.caelum.vraptor.templates.plugins;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.caelum.vraptor.templates.TemplateRenderer;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
 
-public class FreemarkerRenderer implements TemplateRenderer {
+import br.com.caelum.vraptor.templates.TemplateRenderer;
+
+public class VelocityRenderer implements TemplateRenderer {
 	
 	private final Template template;
-	private final Map<String, Object> root = new HashMap<String, Object>();
+	private final VelocityContext context;
 
-	public FreemarkerRenderer(Template template) {
+	public VelocityRenderer(Template template, VelocityContext context) {
 		this.template = template;
+		this.context = context;
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class FreemarkerRenderer implements TemplateRenderer {
 
 	@Override
 	public void add(String key, Object value) {
-		root.put(key, value);
+		context.put(key, value);
 	}
 
 	@Override
@@ -50,15 +50,13 @@ public class FreemarkerRenderer implements TemplateRenderer {
 		StringWriter writer = new StringWriter();
 		merge(writer);
 		return writer.getBuffer().toString();
-		
+			
 	}
 	
-	private void merge(Writer writer) {
+	private void merge(Writer writer){
 		try {
-			template.process(root, writer);
+			template.merge(context, writer);
 			writer.flush();
-		} catch (TemplateException e) {
-			throw new RuntimeException(e);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

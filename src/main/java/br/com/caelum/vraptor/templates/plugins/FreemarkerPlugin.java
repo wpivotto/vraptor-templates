@@ -1,11 +1,10 @@
-package br.com.caelum.vraptor.templates.freemarker;
+package br.com.caelum.vraptor.templates.plugins;
 
 
 import java.io.File;
 import java.io.IOException;
 
 import br.com.caelum.vraptor.templates.TemplateNotFoundException;
-import br.com.caelum.vraptor.templates.TemplatePlugin;
 import br.com.caelum.vraptor.templates.TemplateRenderer;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.cache.TemplateLoader;
