@@ -2,6 +2,9 @@ package br.com.caelum.vraptor.templates.plugins;
 
 import javax.servlet.ServletContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import br.com.caelum.vraptor.ioc.ApplicationScoped;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.ComponentFactory;
@@ -13,7 +16,7 @@ public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin> 
 
 	private TemplatePlugin plugin;
 	private final ServletContext context;
-	
+	private final Logger logger = LoggerFactory.getLogger(TemplatePluginSelector.class);
 
 	public TemplatePluginSelector(ServletContext context) {
 		this.context = context;
@@ -28,10 +31,12 @@ public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin> 
 			
 			if (isClassPresent("freemarker.template.Template")) {
 				this.plugin = new FreemarkerPlugin(path);
+				logger.debug("Using Freemarker as Template Engine");
 			}
 			
 			else if (isClassPresent("org.apache.velocity.Template")) {
 				this.plugin = new VelocityPlugin(path);
+				logger.debug("Using Velocity as Template Engine");
 			}
 			
 			else

@@ -6,5 +6,7 @@
 	<classpathentry kind="lib" path="libs/freemarker.jar"/>
 	<classpathentry kind="lib" path="libs/javax.servlet.jar"/>
 	<classpathentry kind="lib" path="libs/velocity-1.7.jar"/>
+	<classpathentry kind="lib" path="libs/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="libs/slf4j-log4j12-1.6.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
