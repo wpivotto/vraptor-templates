@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +45,11 @@ public class FreemarkerRenderer implements TemplateRenderer {
 		root.put(key, value);
 	}
 
+	@Override
+	public void add(String key, Collection<?> values, Class<?> type) {
+		root.put(key, values); 
+	}
+	
 	@Override
 	public String getContent() {
 		

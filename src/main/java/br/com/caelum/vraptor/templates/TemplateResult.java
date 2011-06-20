@@ -1,5 +1,7 @@
 package br.com.caelum.vraptor.templates;
 
+import java.util.Collection;
+
 import br.com.caelum.vraptor.View;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
@@ -18,7 +20,12 @@ public class TemplateResult implements View {
 		template.with(key, value);
 		return template;
 	}
-
+	  
+	public Template with(String key, Collection<?> value, Class<?> type) {
+		template.with(key, value, type);
+		return template;
+	}
+	
 	public static Class<TemplateResult> template() {
 		return TemplateResult.class;
 	}

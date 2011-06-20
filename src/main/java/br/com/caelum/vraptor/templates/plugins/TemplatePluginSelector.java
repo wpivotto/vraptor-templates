@@ -19,7 +19,7 @@ public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin> 
 	private final Logger logger = LoggerFactory.getLogger(TemplatePluginSelector.class);
 
 	public TemplatePluginSelector(ServletContext context) {
-		this.context = context;
+		this.context = context; 
 	}
 
 	@Override
@@ -38,16 +38,23 @@ public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin> 
 				this.plugin = new VelocityPlugin(path);
 				logger.debug("Using Velocity as Template Engine");
 			}
+			 
+			else if (isClassPresent("org.fusesource.scalate.Template")) {
+				this.plugin = new ScalatePlugin(path);    
+				logger.debug("Using Scalate as Template Engine");
+			}
 			
 			else
 				throw new PluginNotFoundException("Could not find a template engine to use");
 			
+			logger.debug("Templates source path: " + path);
+			
 		}
-		
+		   
 		return plugin;
 		
 	}
-
+  
 	private boolean isClassPresent(String className) {
 		try {
 			Class.forName(className);

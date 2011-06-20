@@ -1,5 +1,7 @@
 package br.com.caelum.vraptor.templates;
 
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.vraptor.Result;
@@ -27,10 +29,16 @@ public class DefaultTemplate implements Template {
 		renderer.add(key, value);
 		return this;
 	}
+	
+	@Override
+	public Template with(String key, Collection<?> values, Class<?> type) {
+		renderer.add(key, values, type);
+		return this;
+	}
 
 	@Override
 	public String getContent() {
-		return renderer.getContent();
+		return renderer.getContent();  
 	}
 
 }

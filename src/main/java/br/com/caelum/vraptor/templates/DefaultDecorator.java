@@ -41,7 +41,7 @@ public class DefaultDecorator implements TemplateDecorator {
 	
 	public void decorate(Template template){
 		template.with("request", getRequest());
-		template.with("session", getSession());
+		template.with("contextPath", getRequest().getServletContext().getContextPath());
 		template.with("validator", getValidator());
 		template.with("localization", getLocalization());
 	}
