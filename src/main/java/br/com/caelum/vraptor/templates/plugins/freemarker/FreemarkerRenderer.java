@@ -1,4 +1,4 @@
-package br.com.caelum.vraptor.templates.plugins;
+package br.com.caelum.vraptor.templates.plugins.freemarker;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,7 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.caelum.vraptor.templates.TemplateRenderer;
+import br.com.caelum.vraptor.templates.plugins.TemplateRenderer;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 

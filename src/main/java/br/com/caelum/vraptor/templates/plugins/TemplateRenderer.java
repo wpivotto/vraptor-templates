@@ -1,10 +1,10 @@
-package br.com.caelum.vraptor.templates;
+package br.com.caelum.vraptor.templates.plugins;
 
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletResponse;
 
-
+  
 public interface TemplateRenderer {
 
 	public void render(HttpServletResponse response);

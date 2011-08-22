@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.ioc.Component;
+import br.com.caelum.vraptor.templates.decorator.TemplateDecorator;
 import br.com.caelum.vraptor.templates.plugins.TemplatePlugin;
+import br.com.caelum.vraptor.templates.plugins.TemplateRenderer;
 
 @Component
 public class DefaultService implements TemplateService {

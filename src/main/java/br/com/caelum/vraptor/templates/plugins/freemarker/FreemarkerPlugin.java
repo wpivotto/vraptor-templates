@@ -1,4 +1,4 @@
-package br.com.caelum.vraptor.templates.plugins;
+package br.com.caelum.vraptor.templates.plugins.freemarker;
 
 
 import java.io.File;
@@ -8,7 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.caelum.vraptor.templates.TemplateNotFoundException;
-import br.com.caelum.vraptor.templates.TemplateRenderer;
+import br.com.caelum.vraptor.templates.plugins.TemplatePlugin;
+import br.com.caelum.vraptor.templates.plugins.TemplateRenderer;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;

@@ -8,7 +8,8 @@ import org.slf4j.LoggerFactory;
 import br.com.caelum.vraptor.ioc.ApplicationScoped;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.ComponentFactory;
-import br.com.caelum.vraptor.templates.PluginNotFoundException;
+import br.com.caelum.vraptor.templates.plugins.freemarker.FreemarkerPlugin;
+import br.com.caelum.vraptor.templates.plugins.velocity.VelocityPlugin;
 
 @Component
 @ApplicationScoped
@@ -22,11 +23,11 @@ public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin> 
 	public TemplatePluginSelector(ServletContext context) {
 		this.context = context; 
 	}
-
+   
 	@Override
 	public TemplatePlugin getInstance() {
 
-		if(this.plugin == null){
+		if(this.plugin == null){   
 			
 			String path = context.getRealPath(getTemplatesPath());
 			
@@ -43,7 +44,7 @@ public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin> 
 			else if (isClassPresent("org.fusesource.scalate.Template")) {
 				this.plugin = new ScalatePlugin(path);    
 				logger.debug("Using Scalate as Template Engine");
-			}
+			}  
 			
 			else
 				throw new PluginNotFoundException("Could not find a template engine to use");

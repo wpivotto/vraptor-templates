@@ -1,5 +1,4 @@
 package br.com.caelum.vraptor.templates.plugins
-import br.com.caelum.vraptor.templates.TemplateRenderer
 import java.io.{PrintWriter, StringWriter}
 import javax.servlet.http.HttpServletResponse
 import org.fusesource.scalate.{Binding, DefaultRenderContext, Template, TemplateEngine}

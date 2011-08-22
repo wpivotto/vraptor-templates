@@ -1,4 +1,4 @@
-package br.com.caelum.vraptor.templates.plugins;
+package br.com.caelum.vraptor.templates.plugins.velocity;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 
-import br.com.caelum.vraptor.templates.TemplateRenderer;
+import br.com.caelum.vraptor.templates.plugins.TemplateRenderer;
+
 
 public class VelocityRenderer implements TemplateRenderer {
 	

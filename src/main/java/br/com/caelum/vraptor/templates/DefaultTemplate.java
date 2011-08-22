@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.templates.plugins.TemplateRenderer;
 
 public class DefaultTemplate implements Template {
 

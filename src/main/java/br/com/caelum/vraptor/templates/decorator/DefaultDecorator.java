@@ -1,4 +1,4 @@
-package br.com.caelum.vraptor.templates;
+package br.com.caelum.vraptor.templates.decorator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.core.Localization;
 import br.com.caelum.vraptor.ioc.Component;
+import br.com.caelum.vraptor.templates.Template;
 
 @Component
 public class DefaultDecorator implements TemplateDecorator {
