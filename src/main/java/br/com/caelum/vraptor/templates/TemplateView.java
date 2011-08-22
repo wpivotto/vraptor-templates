@@ -8,11 +8,11 @@ import br.com.caelum.vraptor.ioc.RequestScoped;
 
 @Component
 @RequestScoped
-public class TemplateResult implements View {
+public class TemplateView implements View {
 
 	private final Template template;
 
-	public TemplateResult(TemplateService service, TemplatePathResolver resolver) {
+	public TemplateView(TemplateService service, TemplatePathResolver resolver) {
 		this.template = service.use(resolver.getTemplatePath());
 	}
 
@@ -30,8 +30,8 @@ public class TemplateResult implements View {
 		template.render();
 	}
 	
-	public static Class<TemplateResult> template() {
-		return TemplateResult.class;
+	public static Class<TemplateView> template() {
+		return TemplateView.class;
 	}
 
 }
