@@ -26,6 +26,10 @@ public class TemplateResult implements View {
 		return template;
 	}
 	
+	public void render(){
+		template.render();
+	}
+	
 	public static Class<TemplateResult> template() {
 		return TemplateResult.class;
 	}
