@@ -1,14 +1,10 @@
 package br.com.caelum.vraptor.templates.plugins
 import br.com.caelum.vraptor.templates.TemplateRenderer
+import java.io.{PrintWriter, StringWriter}
 import javax.servlet.http.HttpServletResponse
-import org.fusesource.scalate.{ Template, RenderContext, TemplateEngine }
-import java.io.StringWriter
-import org.fusesource.scalate.DefaultRenderContext
-import java.io.PrintWriter
-import org.fusesource.scalate.Binding
+import org.fusesource.scalate.{Binding, DefaultRenderContext, Template, TemplateEngine}
 import org.slf4j.LoggerFactory
-import scala.collection.mutable.HashMap
-import scala.collection.JavaConversions._   
+import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
 
 class ScalateRenderer(templateName: String, engine: TemplateEngine) extends TemplateRenderer {

@@ -22,8 +22,4 @@ class ScalatePlugin(path: String) extends TemplatePlugin {
     new ScalateRenderer(template, engine)
   }
   
-  def imports(){
-    engine.importStatements  ::= "scala.collection.Iterable"
-  }
-  
 }
