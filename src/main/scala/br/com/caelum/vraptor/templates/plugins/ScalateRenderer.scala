@@ -32,7 +32,7 @@ class ScalateRenderer(templateName: String, engine: TemplateEngine) extends Temp
   }
 
   private def render() {
-    val template = engine.load(templateName + ".ssp", bindings.toList)
+    val template = engine.load(templateName, bindings.toList)
     template.render(context)
   }
  
