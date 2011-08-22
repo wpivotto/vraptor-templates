@@ -16,6 +16,7 @@ public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin> 
 
 	private TemplatePlugin plugin;
 	private final ServletContext context;
+	private static final String DEFAULT_TEMPLATES_PATH = "/WEB-INF/templates";
 	private final Logger logger = LoggerFactory.getLogger(TemplatePluginSelector.class);
 
 	public TemplatePluginSelector(ServletContext context) {
@@ -27,7 +28,7 @@ public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin> 
 
 		if(this.plugin == null){
 			
-			String path = context.getRealPath("/WEB-INF/templates");
+			String path = context.getRealPath(getTemplatesPath());
 			
 			if (isClassPresent("freemarker.template.Template")) {
 				this.plugin = new FreemarkerPlugin(path);
@@ -53,6 +54,11 @@ public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin> 
 		   
 		return plugin;
 		
+	}
+	
+	private String getTemplatesPath(){
+		String param = context.getInitParameter("vraptor.templates.path");
+		return param != null ? param.trim() : DEFAULT_TEMPLATES_PATH;
 	}
   
 	private boolean isClassPresent(String className) {
