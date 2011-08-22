@@ -8,9 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.caelum.vraptor.templates.TemplateNotFoundException;
+import br.com.caelum.vraptor.templates.TemplatesConfiguration;
 import br.com.caelum.vraptor.templates.plugins.TemplatePlugin;
 import br.com.caelum.vraptor.templates.plugins.TemplateRenderer;
 import freemarker.cache.FileTemplateLoader;
+import freemarker.cache.MruCacheStorage;
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -18,19 +20,23 @@ import freemarker.template.Template;
 public class FreemarkerPlugin implements TemplatePlugin {
   
 	private Configuration cfg;
-	private final String path;
+	private final TemplatesConfiguration configs;
 	private final Logger logger = LoggerFactory.getLogger(FreemarkerPlugin.class);
 	
-	public FreemarkerPlugin(String path){
+	public FreemarkerPlugin(TemplatesConfiguration configs){
 		
-		this.path = path;
+		this.configs = configs;
 		this.cfg = new Configuration();
 		
 		TemplateLoader loader;
 		
 		try {
-			loader = new FileTemplateLoader(new File(path));
+			loader = new FileTemplateLoader(new File(configs.getTemplatesPath()));
 			cfg.setTemplateLoader(loader);
+			if(configs.allowCaching())
+				cfg.setCacheStorage(new MruCacheStorage(0, Integer.MAX_VALUE));
+			else
+				cfg.setCacheStorage(new MruCacheStorage(0, 0));
 		} catch (IOException e) {
 			throw new RuntimeException("Template path could not be found");
 		}
@@ -38,10 +44,10 @@ public class FreemarkerPlugin implements TemplatePlugin {
 
 	public Template getTemplate(String name){
 		try {
-			logger.debug("trying to load template " + name + "at" + path);
+			logger.debug("trying to load template " + name + "at" + configs.getTemplatesPath());
 			return cfg.getTemplate(name + ".ftl");
 		} catch (IOException e) {
-			throw new TemplateNotFoundException("Could not find template " + name + " at " + path);
+			throw new TemplateNotFoundException("Could not find template " + name + " at " + configs.getTemplatesPath());
 		}
 	}
 

@@ -5,13 +5,15 @@ import org.fusesource.scalate.util.FileResourceLoader
 import org.fusesource.scalate._
 import scala.collection.JavaConversions._
 import br.com.caelum.vraptor.templates.TemplateNotFoundException
+import br.com.caelum.vraptor.templates.TemplatesConfiguration
 import org.slf4j.LoggerFactory
 
-class ScalatePlugin(path: String) extends TemplatePlugin {
+class ScalatePlugin(configs: TemplatesConfiguration) extends TemplatePlugin {
 
   val engine = new TemplateEngine
-  engine.allowCaching = false
-  engine.allowReload = true  
+  val path = configs.getTemplatesPath
+  engine.allowCaching = configs.allowCaching
+  engine.allowReload = configs.allowReload  
   engine.resourceLoader = new FileResourceLoader(Some(new File(path))) 
   val logger = LoggerFactory.getLogger(getClass)
  
