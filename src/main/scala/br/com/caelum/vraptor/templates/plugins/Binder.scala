@@ -1,12 +1,11 @@
 package br.com.caelum.vraptor.templates.plugins
-import org.fusesource.scalate.TemplateEngine
-import scala.collection.mutable.ListBuffer
-import org.fusesource.scalate.Binding
-import org.fusesource.scalate.RenderContext
+import org.fusesource.scalate.{Binding, RenderContext, TemplateEngine}
 import org.slf4j.LoggerFactory
 import scala.collection.JavaConversions._
+import scala.collection.mutable.ListBuffer
+import br.com.caelum.vraptor.templates.TemplatesConfiguration
 
-class Binder(engine: TemplateEngine, context: RenderContext) {  
+class Binder(engine: TemplateEngine, context: RenderContext, configs: TemplatesConfiguration) {  
   
   val bindings = new ListBuffer[Binding]
   val logger = LoggerFactory.getLogger(getClass)
@@ -28,7 +27,19 @@ class Binder(engine: TemplateEngine, context: RenderContext) {
   }
   
   def getBindings(): List[Binding] = {
+    bindHelpers
     bindings.toList
+  }
+  
+  
+   def bindHelpers() {
+     val helper = new TemplateHelper(configs.getContextPath)
+     bindings += Binding("helper", helper.getClass.getName, true)
+     context.attributes("helper") = helper
+	 engine.importStatements  ::= "import br.com.caelum.vraptor.validator.ValidationMessage"
   }
 
 }
+
+
+  

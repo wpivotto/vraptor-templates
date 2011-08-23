@@ -1,12 +1,11 @@
 package br.com.caelum.vraptor.templates.plugins
 
+import br.com.caelum.vraptor.templates.{TemplateNotFoundException, TemplatesConfiguration}
 import java.io.File
 import org.fusesource.scalate.util.FileResourceLoader
 import org.fusesource.scalate._
-import scala.collection.JavaConversions._
-import br.com.caelum.vraptor.templates.TemplateNotFoundException
-import br.com.caelum.vraptor.templates.TemplatesConfiguration
 import org.slf4j.LoggerFactory
+import scala.collection.JavaConversions._
 
 class ScalatePlugin(configs: TemplatesConfiguration) extends TemplatePlugin {
 
@@ -19,7 +18,7 @@ class ScalatePlugin(configs: TemplatesConfiguration) extends TemplatePlugin {
  
   def getRenderer(templateName: String): TemplateRenderer = {
 	 val template = getTemplate(templateName)
-     new ScalateRenderer(template, engine)
+     new ScalateRenderer(template, engine, configs)
   }
   
   private def getTemplate(template : String): String = {
@@ -45,8 +44,5 @@ class ScalatePlugin(configs: TemplatesConfiguration) extends TemplatePlugin {
 	val sep = File.separatorChar
 	if(sep == '/') name else name.replace(sep, '/')
   }
-  
-  
-  
   
 }

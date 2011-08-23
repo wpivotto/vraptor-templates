@@ -1,14 +1,14 @@
 package br.com.caelum.vraptor.templates.plugins
+import java.io.{PrintWriter, StringWriter}
 import javax.servlet.http.HttpServletResponse
 import org.fusesource.scalate.{DefaultRenderContext, Template, TemplateEngine}
-import java.io.StringWriter
-import java.io.PrintWriter
+import br.com.caelum.vraptor.templates.TemplatesConfiguration
 
-class ScalateRenderer(templateName: String, engine: TemplateEngine) extends TemplateRenderer {
+class ScalateRenderer(templateName: String, engine: TemplateEngine, configs: TemplatesConfiguration) extends TemplateRenderer {
   
   val output = new StringWriter
   val context = new DefaultRenderContext("", engine, new PrintWriter(output))
-  val binder = new Binder(engine, context)
+  val binder = new Binder(engine, context, configs)
   
   def render(response: HttpServletResponse) {
     render

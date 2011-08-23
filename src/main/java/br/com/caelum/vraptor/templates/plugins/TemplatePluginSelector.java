@@ -10,20 +10,20 @@ import br.com.caelum.vraptor.templates.TemplatesConfiguration;
 import br.com.caelum.vraptor.templates.plugins.freemarker.FreemarkerPlugin;
 import br.com.caelum.vraptor.templates.plugins.velocity.VelocityPlugin;
 
-@Component
+@Component   
 @ApplicationScoped
 public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin>  {
-
+  
 	private TemplatePlugin plugin;
 	private final TemplatesConfiguration configs;
 	private final Logger logger = LoggerFactory.getLogger(TemplatePluginSelector.class);
 
 	public TemplatePluginSelector(TemplatesConfiguration configs) {
 		this.configs = configs;
-	}
+	}       
    
 	@Override
-	public TemplatePlugin getInstance() {
+	public TemplatePlugin getInstance() {      
 
 		if(this.plugin == null){   
 			
@@ -37,8 +37,8 @@ public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin> 
 				logger.debug("Using Velocity as Template Engine");
 			}
 			 
-			else if (isClassPresent("org.fusesource.scalate.Template")) {
-				this.plugin = new ScalatePlugin(configs);    
+			else if (isClassPresent("org.fusesource.scalate.Template")) {    
+				this.plugin = new ScalatePlugin(configs);      
 				logger.debug("Using Scalate as Template Engine");
 			}  
 			

@@ -29,6 +29,10 @@ public class TemplatesConfiguration {
 	public String getTemplatesPath(){
 		return context.getRealPath(getTemplatesRelativePath());
 	}
+	  
+	public String getContextPath(){
+		return context.getContextPath();
+	}
 	
 	private String getTemplatesRelativePath(){
 		String param = context.getInitParameter("vraptor.templates.path");
