@@ -10,7 +10,7 @@ Engines Supported
 
 * Velocity
 * Freemarker
-* Scalate (SSP Scaml, Jade, Mustache) 
+* Scalate (SSP, Scaml, Jade, Mustache) 
 
 Installation
 ------
@@ -76,6 +76,7 @@ Objects injected by the library:
 * context path
 * localization
 * validator
+* i18n
 
 Decorating templates 
 ------
@@ -98,8 +99,8 @@ To inject other objects just build a class like this:
 
 # Conventions 
 
-At the end of method execution, VRaptor will dispatch the request to the template at /WEB-INF/templates/clients/dashboard.(vm, ftl, ssp...). 
-The convention for the default view is /WEB-INF/templates/<controller_name>/<method_name>.<file_extension>.
+At the end of method execution, VRaptor will dispatch the request to the template at `/WEB-INF/templates/clients/dashboard.(vm, ftl, ssp...)`. 
+The convention for the default view is `/WEB-INF/templates/<controller_name>/<method_name>.<file_extension>`.
 
 Scalate
 ------
@@ -127,3 +128,21 @@ So to iterate just do:
 	      	<td>${client.getEmail}</td>
 	   	</tr>  
 	#end
+
+Helpers
+------
+
+Helper methods automatically exposed to the templates
+
+	%form{:action => {"clients".url}, :method => "post"}
+	
+will generate the following action `/context-path/clients` (Equivalent of `<c:url/>`)
+
+	${"users_form".i18n}
+	
+will search for the key `users_form` in the resource bundle `messages.properties` 
+
+Example
+------
+
+<https://github.com/wpivotto/vraptor-templates-example>
