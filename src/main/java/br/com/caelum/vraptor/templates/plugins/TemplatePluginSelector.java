@@ -19,7 +19,7 @@ public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin> 
 	private final Logger logger = LoggerFactory.getLogger(TemplatePluginSelector.class);
 
 	public TemplatePluginSelector(TemplatesConfiguration configs) {
-		this.configs = configs;
+		this.configs = configs;  
 	}       
    
 	@Override

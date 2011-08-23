@@ -14,7 +14,7 @@ class TemplateHelper(context: String) {
   }
   
   object I18nHelper{
-    def i(str:String) = new CustomValidations().i18n(str)
+    def i(str:String) = new CustomValidations().getText(str)
   }
   
   
