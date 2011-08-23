@@ -1,30 +1,29 @@
 ## vraptor-templates
 
-Uma biblioteca simples para renderizar templates com vraptor.
-É fortemente baseada no projeto <https://github.com/caelum/vraptor-freemarker>
+A simple library to render templates with vraptor. 
 
-A idéia é tornar padrão a renderização de templates independente da engine escolhida (Freemarker, Velocity...)
-bastando adicionar os jars da sua implementação preferida no classpath
+The idea is to make the default rendering engine independent of the chosen template (Freemarker, Velocity ...) 
+Simply add your preferred implementation in the classpath. 
 
-Engines Suportadas
+Engines Supported
 ------
 
 * Velocity
 * Freemarker
-* Scalate (SSP)
+* Scalate (SSP Scaml, Jade, Mustache) 
 
-Instalação (Adicione ao seu web.xml)
+Installation
 ------
 
-Adicione os .jars e dependências na pasta WEB-INF/libs
-Configure o web.xml
+Put `vraptor-template.jar` and dependencies in your `WEB-INF/lib` folder. You can get a copy here
+Add packages on `web.xml`
 
 		<context-param>
         	<param-name>br.com.caelum.vraptor.packages</param-name>
 	        <param-value>br.com.caelum.vraptor.templates</param-value>
     	</context-param>
 
-Renderizando usando TemplateService
+Rendering using TemplateService 
 ------
 
 		@Resource
@@ -45,10 +44,10 @@ Renderizando usando TemplateService
 			
 		}
 		
-Renderizando usando Result
+Rendering using Result 
 ------
 		
-		import static br.com.caelum.vraptor.templates.TemplateResult.*;
+		import static br.com.caelum.vraptor.templates.TemplateView.*;
 		
 		@Resource
 		public class DashboardController {
@@ -68,22 +67,20 @@ Renderizando usando Result
 			
 		}
 
-Objetos implicitos
+Implicit objects 
 ------
 
-Objetos injetados pela biblioteca:
+Objects injected by the library: 
 
 * request
 * context path
 * localization
 * validator
 
-Exemplos de uso: ${localization.locale.country}
-
-Decorando templates
+Decorating templates 
 ------
 
-Para injetar outros objetos basta construir uma classe como esta
+To inject other objects just build a class like this: 
 
 	@Component
 	public class CustomDecorator implements TemplateDecorator {
@@ -99,31 +96,30 @@ Para injetar outros objetos basta construir uma classe como esta
 		}
 	}
 
-# Convenções
+# Conventions 
 
-Ao terminar a execução do método, o dispatch da requisição vai para o template /WEB-INF/templates/clients/dashboard.vm ou ftl.
-Ou seja, a convenção para a view padrão é /WEB-INF/templates/nome_do_controller/nome_do_metodo.extensao_do_template
+At the end of method execution, VRaptor will dispatch the request to the template at /WEB-INF/templates/clients/dashboard.(vm, ftl, ssp...). 
+The convention for the default view is /WEB-INF/templates/<controller_name>/<method_name>.<file_extension>.
 
-
-Scalate (Scala Server Pages)
+Scalate
 ------
 
-Para tornar os templates mais "DRY", os binds e imports dos atributos passados para a template são resolvidos automaticamente pela biblioteca.
-Logo não é necessário declarar nenhum atributo no cabeçalho da sua template, como no exemplo:
+To make the templates more "DRY", the binds and imports of attributes passed to the template are resolved automatically by the library.
+So it's not necessary to declare any attribute in the header of your template, like this:
 
 	<%@ val model: Person %>
 	<% import model._ %>
 	<p>Hello ${name}, what is the weather like in ${city}</p>
 	
-Basta acessar diretamente os métodos:
+Just go directly to the methods:
 	
 	<p>Hello ${person.getName}, what is the weather like in ${person.getCity}</p>
 
-Para passar coleções é necessário especificar o tipo do dado:
+To pass collections:
 
-	result.use(template()).with("clientes", clients.listAll(), Client.class).render()
+	result.use(template()).with("clients", clients.listAll(), Client.class).render()
 
-Assim para iterar basta fazer:
+So to iterate just do:
 
 	#for(client <- clients)
     	<tr>  
