@@ -1,0 +1,148 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>vraptor-templates</groupId>
+  <artifactId>vraptor-templates</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>vraptor-templates</name>
+  
+  <developers>
+		<developer>
+			<id>wpivotto</id>
+			<name>William Pivotto</name>
+			<email>wpivotto@gmail.com</email>
+			<organization>Prixma</organization>
+			<organizationUrl>http://www.prixma.com.br</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>-3</timezone>
+		</developer>
+	</developers>
+	
+  <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+  	<build>
+		<plugins>
+
+			<!-- Additional Resources -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- Java Sources Compilation -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+			<!-- Eclipse configuration -->
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.8</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+	
+  <dependencies>
+ 
+  	<dependency>
+  		<groupId>br.com.caelum</groupId>
+  		<artifactId>vraptor</artifactId>
+  		<version>3.3.1</version>
+  	</dependency>
+  	<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+  	<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		
+		<!--  [Tests] -->
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock</artifactId>
+			<version>2.4.0</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>hamcrest-core</artifactId>
+					<groupId>org.hamcrest</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>hamcrest-library</artifactId>
+					<groupId>org.hamcrest</groupId>
+				</exclusion>
+			</exclusions>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.8.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.5</version>
+			<scope>test</scope>
+		</dependency>
+	<!--  [/Tests] -->
+	
+	<dependency>
+		<groupId>org.freemarker</groupId>
+		<artifactId>freemarker</artifactId>
+		<version>2.3.18</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.velocity</groupId>
+		<artifactId>velocity</artifactId>
+		<version>1.7</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+		<version>2.5</version>
+	</dependency>
+	<dependency>
+		<groupId>org.scala-lang</groupId>
+		<artifactId>scala-library</artifactId>
+		<version>2.9.0</version>
+	</dependency>
+  </dependencies>
+  
+  <licenses>
+		<license>
+			<distribution>repo</distribution>
+			<name>Apache License, Version 2.0</name>
+			<url>http://apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	
+	<scm>
+		<url>http://github.com/wpivotto/vraptor-templates</url>
+		<connection>scm:git:git://github.com/wpivotto/vraptor-templates</connection>
+		<developerConnection>scm:git:git@github.com:wpivotto/vraptor-templates.git</developerConnection>
+	</scm>
+</project>
