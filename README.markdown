@@ -5,7 +5,7 @@ A simple library to render templates with vraptor.
 The idea is to make the default rendering engine independent of the chosen template (Freemarker, Velocity ...) 
 Simply add your preferred implementation in the classpath. 
 
-Engines Supported
+Engines
 ------
 
 * Velocity
@@ -60,9 +60,15 @@ Rendering using Result
 				this.result = result;
 			}
 			
-			@Get("/clients/dashboard")
+			@Get("/dashboard")
 			public void dashboard(){
 				result.use(template()).with("clients", clients.listAll()).render();
+			}
+			
+			@Get("/dashboard/{id}")
+			public void dashboard(Long id){
+				result.include("client", clients.find(id));
+				result.use(template()).render();
 			}
 			
 		}
@@ -73,9 +79,8 @@ Implicit objects
 Objects injected by the library: 
 
 * request
+* request parameters (result.include)
 * context path
-* localization
-* validator
 * i18n
 
 Decorating templates 
