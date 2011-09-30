@@ -13,7 +13,7 @@ import br.com.caelum.vraptor.templates.plugins.velocity.VelocityPlugin;
 @Component   
 @ApplicationScoped
 public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin>  {
-  
+    
 	private TemplatePlugin plugin;
 	private final TemplatesConfiguration configs;
 	private final Logger logger = LoggerFactory.getLogger(TemplatePluginSelector.class);

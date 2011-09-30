@@ -11,10 +11,11 @@ class ScalatePlugin(configs: TemplatesConfiguration) extends TemplatePlugin {
 
   val engine = new TemplateEngine
   val path = configs.getTemplatesPath
+  val logger = LoggerFactory.getLogger(getClass)
   engine.allowCaching = configs.allowCaching
   engine.allowReload = configs.allowReload  
   engine.resourceLoader = new FileResourceLoader(Some(new File(path))) 
-  val logger = LoggerFactory.getLogger(getClass)
+  importStatements
  
   def getRenderer(templateName: String): TemplateRenderer = {
 	 val template = getTemplate(templateName)
@@ -31,6 +32,13 @@ class ScalatePlugin(configs: TemplatesConfiguration) extends TemplatePlugin {
     if(templateExists(template, ".mustache"))
     	return template + ".mustache"
      throw new TemplateNotFoundException("Could not find template " + template + " at " + path)
+  }
+  
+  private def importStatements(){
+	  for (val statement <- configs.importStatements){
+		  engine.importStatements ::= "import " + statement + "._"
+		  logger.debug("import package " + statement + "._")
+      }
   }
   
   private def templateExists(templateName : String, extension : String): Boolean = {

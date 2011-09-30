@@ -16,14 +16,28 @@ public class TemplatesConfiguration {
 		this.context = context;
 	}
 	
+	public boolean hasParameter(String param){
+		return context.getInitParameter(param) != null;
+	}
+	
+	public boolean isEnabled(String param){
+		return hasParameter(param) && context.getInitParameter(param).equalsIgnoreCase("true");
+	}
+	
 	public boolean allowCaching(){
-		String param = context.getInitParameter("vraptor.templates.cache");
-		return param != null && param.equalsIgnoreCase("true");
+		return isEnabled("vraptor.templates.cache");
 	}
 	
 	public boolean allowReload(){
-		String param = context.getInitParameter("vraptor.templates.reload");
-		return param != null && param.equalsIgnoreCase("true");
+		return isEnabled("vraptor.templates.reload");
+	}
+	
+	public String[] importStatements(){
+		String packages = context.getInitParameter("vraptor.templates.packages");
+		if(packages != null){
+			return packages.split(",");
+		}
+		return new String[]{};
 	}
 	
 	public String getTemplatesPath(){
