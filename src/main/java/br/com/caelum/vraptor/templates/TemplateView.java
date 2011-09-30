@@ -15,7 +15,7 @@ public class TemplateView implements View {
 	public TemplateView(TemplateService service, TemplatePathResolver resolver) {
 		this.template = service.use(resolver.getTemplatePath());
 	}
-
+	
 	public Template with(String key, Object value) {
 		template.with(key, value);
 		return template;

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/main/scala"/>
 	<classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="libs/vraptor-3.3.1.jar"/>
 	<classpathentry kind="lib" path="libs/freemarker.jar"/>
 	<classpathentry kind="lib" path="libs/javax.servlet.jar"/>
 	<classpathentry kind="lib" path="libs/velocity-1.7.jar"/>
@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="libs/scalate-core-1.5.0.jar"/>
 	<classpathentry kind="lib" path="libs/scalate-util-1.5.0.jar"/>
 	<classpathentry kind="lib" path="libs/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="libs/vraptor-3.4.0-20110704.175134-7.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
