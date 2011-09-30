@@ -15,13 +15,7 @@ Engines
 Installation
 ------
 
-Put `vraptor-template.jar` and dependencies in your `WEB-INF/lib` folder. You can get a copy here
-Add packages on `web.xml`
-
-		<context-param>
-        	<param-name>br.com.caelum.vraptor.packages</param-name>
-	        <param-value>br.com.caelum.vraptor.templates</param-value>
-    	</context-param>
+Put `vraptor-templates-1.0.XX.jar` and dependencies in your `WEB-INF/lib` folder. 
 
 Rendering using Result 
 ------
@@ -50,6 +44,12 @@ Rendering using Result
 			public void edit(Long id){
 				result.include("client", clients.find(id));
 				result.use(template()).render();
+			}
+			
+			@Put("/clients")
+			public void update(Client client){
+				clients.update(client);
+				result.redirectTo(this).show();
 			}
 			
 		}

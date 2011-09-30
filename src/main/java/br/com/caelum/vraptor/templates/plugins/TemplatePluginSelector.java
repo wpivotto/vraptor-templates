@@ -20,39 +20,36 @@ public class TemplatePluginSelector implements ComponentFactory<TemplatePlugin> 
 
 	public TemplatePluginSelector(TemplatesConfiguration configs) {
 		this.configs = configs;  
+		buildEngine();
 	}       
    
 	@Override
 	public TemplatePlugin getInstance() {      
 
-		if(this.plugin == null){   
-			
-			if (isClassPresent("freemarker.template.Template")) {
-				this.plugin = new FreemarkerPlugin(configs);
-				logger.debug("Using Freemarker as Template Engine");
-			}
-			
-			else if (isClassPresent("org.apache.velocity.Template")) {
-				this.plugin = new VelocityPlugin(configs);
-				logger.debug("Using Velocity as Template Engine");
-			}
-			 
-			else if (isClassPresent("org.fusesource.scalate.Template")) {    
-				this.plugin = new ScalatePlugin(configs);      
-				logger.debug("Using Scalate as Template Engine");
-			}  
-			
-			else
-				throw new PluginNotFoundException("Could not find a template engine to use");
-			
-			logger.debug("Templates source path: " + configs.getTemplatesPath());
-			
-		}
-		   
+		if(this.plugin == null)
+			buildEngine();
 		return plugin;
 		
 	}
 	
+	private void buildEngine(){
+		if (isClassPresent("freemarker.template.Template")) {
+			this.plugin = new FreemarkerPlugin(configs);
+			logger.debug("Using Freemarker as Template Engine");
+		}
+		
+		else if (isClassPresent("org.apache.velocity.Template")) {
+			this.plugin = new VelocityPlugin(configs);
+			logger.debug("Using Velocity as Template Engine");
+		}
+		 
+		else if (isClassPresent("org.fusesource.scalate.Template")) {    
+			this.plugin = new ScalatePlugin(configs);      
+			logger.debug("Using Scalate as Template Engine");
+		}  
+		else
+			throw new PluginNotFoundException("Could not find a template engine to use");
+	}
 	
   
 	private boolean isClassPresent(String className) {
