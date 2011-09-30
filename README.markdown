@@ -23,6 +23,102 @@ Add packages on `web.xml`
 	        <param-value>br.com.caelum.vraptor.templates</param-value>
     	</context-param>
 
+Rendering using Result 
+------
+		
+		import static br.com.caelum.vraptor.templates.TemplateView.*;
+		
+		@Resource
+		public class ClientsController {
+		
+			private final Clients clients;
+			private final Result result;
+		
+			public ClientsController(Clients clients, Result result) {
+				this.clients = clients;
+				this.result = result;
+			}
+			
+			public void form(){}
+			
+			public void show(){
+				result.include("clients", clients.all());
+				result.use(template()).render();
+			}
+			
+			@Get("/edit/{id}")
+			public void edit(Long id){
+				result.include("client", clients.find(id));
+				result.use(template()).render();
+			}
+			
+		}
+		
+		
+WEB-INF/templates/clients/edit.jade
+------
+		
+		html
+  			head
+    			title = {"edit_client".i18n}
+  			body
+    			form(action={"clients".url} method="POST")
+      				input(type="hidden" name="_method" value="PUT")
+      				input(type="hidden" name="client.id" value={client.getId})
+      				label(for="client.name") #{"label_name".i18n}:
+      				input(type="text" name="client.name" value={client.getName})
+      				label(for="client.email") #{"label_email".i18n}:
+      				input(type="text" name="client.email" value={client.getEmail})
+      				input(type="submit" value="Update" class="button")		
+      	
+      	
+WEB-INF/templates/clients/form.scaml
+------
+      	
+      	%html
+  			%title #{"new_client".i18n}
+  			%body
+  				%form{:action => {"clients".url}, :method => "post"}
+    				%label{:for => "client.name"} #{"label_name".i18n}:
+    				%input{:type => "text", :name => "client.name"}
+    				%label{:for => "client.email"} #{"label_email".i18n}:
+    				%input{:type => "text", :name => "client.email"}
+    				%input{:type => "submit", :value => "Save", :class => "button"}
+    	
+    	
+WEB-INF/templates/clients/show.ssp
+------
+
+    	<body>
+	   
+	   		<a href="${"form".url}">New</a>
+	   
+	   			${"clients_list".i18n}
+	  
+				<table cellspacing = "5" border = "0" cellpadding = "5">  
+		   			<tr>  
+		      			<td>Name</td>   
+		      			<td>Email</td>   
+		   			</tr> 
+		   			#for(client <- clients)
+	    				<tr>    
+		      				<td>${client.getName}</td>          
+		      				<td>${client.getEmail}</td>
+		      				<td><a href="${contextPath}/client/${client.getId}/edit">Edit</a></td>
+		   				</tr>  
+					#end
+	   			</table>
+	   
+	   		<a href="${"logoff".url}">Log Off</a>
+	   		
+	   	</body>
+		
+		
+# Conventions 
+
+At the end of method execution, VRaptor will dispatch the request to the template at `/WEB-INF/templates/clients/show.(vm, ftl, ssp, scaml, jade, mustache)`. 
+The convention for the default view is `/WEB-INF/templates/<controller_name>/<method_name>.<file_extension>`.
+		
 Rendering using TemplateService 
 ------
 
@@ -44,34 +140,6 @@ Rendering using TemplateService
 			
 		}
 		
-Rendering using Result 
-------
-		
-		import static br.com.caelum.vraptor.templates.TemplateView.*;
-		
-		@Resource
-		public class DashboardController {
-		
-			private final Clients clients;
-			private final Result result;
-		
-			public DashboardController(Clients clients, Result result) {
-				this.clients = clients;
-				this.result = result;
-			}
-			
-			@Get("/dashboard")
-			public void dashboard(){
-				result.use(template()).with("clients", clients.listAll()).render();
-			}
-			
-			@Get("/dashboard/{id}")
-			public void dashboard(Long id){
-				result.include("client", clients.find(id));
-				result.use(template()).render();
-			}
-			
-		}
 
 Implicit objects 
 ------
@@ -101,11 +169,6 @@ To inject other objects just build a class like this:
 			template.with("user", user);
 		}
 	}
-
-# Conventions 
-
-At the end of method execution, VRaptor will dispatch the request to the template at `/WEB-INF/templates/clients/dashboard.(vm, ftl, ssp...)`. 
-The convention for the default view is `/WEB-INF/templates/<controller_name>/<method_name>.<file_extension>`.
 
 Scalate
 ------
